@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import "./App.css";
 
 class ListItem extends Component {
-   render() {
-      return (
-         <div>
-           <li>Make the list!</li>
-         </div>
-      );
-   }
+  render() {
+    return (
+      <div>
+        <li>{this.props.todoItem}</li>
+      </div>
+    );
+  }
 }
 
 export default ListItem;
