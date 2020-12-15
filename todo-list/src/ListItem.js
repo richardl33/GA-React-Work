@@ -22,6 +22,6 @@ import "./App.css";
 // }
 
 // Functional Component - Shorthand
-const ListItem = props => <li>{props.doThis}</li>;
+const ListItem = props => <li>{props.todoItem}</li>;
 
 export default ListItem;
