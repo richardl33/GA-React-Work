@@ -4,6 +4,24 @@ import Comment from "./Comment";
 import Author from "./Author";
 
 class Post extends Component {
+  state = {
+    body: this.props.body,
+    inputValue: '',
+  };
+
+  changeBody = (event) => {
+    this.setState({
+      body: this.state.inputValue,
+      inputValue: '',
+    });
+  };
+
+  onChange = (event) => {
+    this.setState({
+      inputValue: event.target.value,
+    })
+  };
+
   render() {
     // let allComments = [
     //   <Comment body={this.props.comments[0]} />,
@@ -26,7 +44,9 @@ class Post extends Component {
         <h1>Written by{this.props.title}</h1>
         {authors}
         <div>
-          <p>{this.props.body}</p>
+          <p>{this.state.body}</p>
+          <button onClick={this.changeBody}>Edit Body</button>
+          <input onChange={this.onChange} value={this.state.inputValue}/>
         </div>
         <h3>Comments:</h3>
         {allComments}
