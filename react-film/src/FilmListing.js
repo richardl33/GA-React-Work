@@ -10,6 +10,7 @@ class FilmListing extends Component {
             key={`film-${index}`}
          />
       ));
+      
       return (
          <div className="film-list">
            <h1 className="section-title">FILMS</h1>
