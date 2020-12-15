@@ -4,9 +4,11 @@ import './index.css';
 import MyList from './MyList';
 import reportWebVitals from './reportWebVitals';
 
-const toDos = ["Buy ice cream.", "Eat ice cream.", "Go to the gym."];
+// const toDos = ["Buy ice cream.", "Eat ice cream.", "Go to the gym."];
 
-ReactDOM.render(<MyList theList={toDos} />, document.getElementById("root"));
+// ReactDOM.render(<MyList theList={toDos} />, document.getElementById("root"));
+
+ReactDOM.render(<MyList />, document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

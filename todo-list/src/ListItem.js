@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+// import React, { Component } from "react";
 import "./App.css";
 
 // Class Component
@@ -22,6 +22,6 @@ import "./App.css";
 // }
 
 // Functional Component - Shorthand
-const ListItem = props => <li>{props.todoItem}</li>;
+const ListItem = props => <li>{props.doThis}</li>;
 
 export default ListItem;
