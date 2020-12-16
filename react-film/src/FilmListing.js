@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import FilmRow from './FilmRow';
 class FilmListing extends Component {
-   handleFilterClick = (filter) => {
-      console.log(`Setting filter to ${filter}`);
+   state = {
+      filter: 'all',
    };
 
-   onClick = () => {
-
+   handleFilterClick = (filter) => {
+      console.log(`Setting filter to ${filter}`);
+      this.setState({
+         filter: filter,
+      });
    };
 
    render() {
@@ -19,17 +22,20 @@ class FilmListing extends Component {
          />
       ));
       
+      const filterFave = this.state.filter === 'faves' ? 'is-active' : '';
+      const filterAll = this.state.filter === 'all' ? 'is-active' : '';
+
       return (
          <div className="film-list">
             <h1 className="section-title">FILMS</h1>
             <div className="film-list">
                <h1 className="section-title">FILMS</h1>
                <div className="film-list-filters">
-                  <div onClick={() => this.handleFilterClick('all')} className="film-list-filter">
+                  <div onClick={() => this.handleFilterClick('all')} className={`film-list-filter ${filterAll}`}>
                      ALL
                      <span className="section-count">{this.props.films.length}</span>
                   </div>
-                  <div onClick={() => this.handleFilterClick('faves')} className="film-list-filter">
+                  <div onClick={() => this.handleFilterClick('faves')} className={`film-list-filter ${filterFave}`}>
                      FAVES
                      <span className="section-count">0</span>
                   </div>
