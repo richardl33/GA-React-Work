@@ -10,6 +10,8 @@ class FilmListing extends Component {
       this.setState({
          filter: filter,
       });
+
+      console.log(this.state.filter);
    };
 
    render() {
