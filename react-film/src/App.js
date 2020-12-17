@@ -19,13 +19,20 @@ class App extends Component {
 
      fetch(url)
      .then((response) => {
-       return response.json();
-     }).then((data) => {
+       if(response.status === 200) {
+        return response.json(); //response.json() is asynchronous
+       } else if (response.status === 403) {
+         throw new Error("Your credentials are incorrect");
+       }
+
+     })
+     .then((data) => {
        console.table(data); // Take a look at what you get back.
        this.setState({
          current: data,
        });
-     });
+     })
+     .catch((error) => console.log("An error occurred!", error));
   };
 
   handleFaveToggle = (film) => {
