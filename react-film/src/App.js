@@ -13,6 +13,13 @@ class App extends Component {
     current: {},
   };
 
+  handleDetailsClick = (film) => {
+     console.log(`Fetching details for ${film}`);
+     this.setState({
+       current: film,
+     });
+  };
+
   handleFaveToggle = (film) => {
     const faves = [...this.state.faves].slice();
     const filmIndex = faves.indexOf(film)
@@ -33,10 +40,14 @@ class App extends Component {
   }
 
   render() {
-    console.table(this.state.faves);
+    console.table(this.state.current);
     return (
       <div className="film-library">
-      <FilmListing films={this.state.films} faves={this.state.faves} onFaveToggle={this.handleFaveToggle} />
+      <FilmListing 
+        films={this.state.films} 
+        faves={this.state.faves} 
+        onFaveToggle={this.handleFaveToggle}
+        onDetailsClick={this.handleDetailsClick} />
       <FilmDetails films={this.state.current} />
       </div>
     );
