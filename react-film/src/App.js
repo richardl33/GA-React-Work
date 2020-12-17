@@ -22,10 +22,9 @@ class App extends Component {
        return response.json();
      }).then((data) => {
        console.table(data); // Take a look at what you get back.
-     });
-
-     this.setState({
-       current: film,
+       this.setState({
+         current: data,
+       });
      });
   };
 
