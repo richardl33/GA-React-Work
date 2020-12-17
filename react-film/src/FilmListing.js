@@ -15,7 +15,8 @@ class FilmListing extends Component {
    };
 
    render() {
-      let allFilms = this.props.films.map((film, index) => (
+      const films = (this.state.filter === 'faves') ? this.props.faves : this.props.films
+      let allFilms = films.map((film, index) => (
         <FilmRow
             onDetailsClick={() => this.props.onDetailsClick(film)}
             onFaveToggle={() => this.props.onFaveToggle(film)}
