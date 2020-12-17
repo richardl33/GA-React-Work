@@ -41,7 +41,7 @@ class FilmListing extends Component {
                   </div>
                   <div onClick={() => this.handleFilterClick('faves')} className={`film-list-filter ${filterFave}`}>
                      FAVES
-                     <span className="section-count">0</span>
+                     <span className="section-count">{this.props.faves.length}</span>
                   </div>
                </div>
 
