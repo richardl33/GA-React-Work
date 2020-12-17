@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React from 'react';
 import FilmPoster from './FilmPoster';
 import Fave from './Fave';
 // class FilmRow extends Component {
