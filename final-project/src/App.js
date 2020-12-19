@@ -1,22 +1,19 @@
 import React, { Component } from "react";
 import Lists from './Lists';
+import SuccessGIF from './SuccessGIF';
+
 import './App.css';
 
 class App extends Component {
   state = {
     toDoList: [],
     completedList: [],
+    listSuccess: [],
     newTask: '',
+    successGIF: '',
   }
 
-  componentDidMount = () => {
-    // if (localStorage.getItem('toDoList') === null) {
-    //   let sessTodo = JSON.parse(sessionStorage.getItem('toDoList'));
-    //   this.setState({
-    //     toDoList: sessTodo,
-    //   })
-    // }
-
+  componentDidMount = async () => {
       let sessTodo = JSON.parse(sessionStorage.getItem('toDoList'));
       console.log(sessTodo);
       if (sessTodo !== null) {
@@ -25,16 +22,21 @@ class App extends Component {
         })
       }
 
-    console.log('Mount UP!!!');
+      const response = await fetch('https://api.giphy.com/v1/gifs/search?api_key=GSlrJFiKBbzXcVGqO33YpRuZFjGBa5qP&q=success&limit=1&offset=0&rating=r&lang=en');
+      const data = await response.json();
+      // console.log(data.data[0].images.downsized_medium.url);
+
+      this.setState({
+        successGIF: data.data[0].images.downsized_medium.url
+      });
   }
 
   componentDidUpdate = () => {
     sessionStorage.setItem('toDoList', JSON.stringify(this.state.toDoList));
-
-    console.log('Updated!!!');
+    // console.log('Updated!!!');
   }
 
-  handleNewItemChange = e => {
+  handleNewItemInput = e => {
     this.setState({
       newTask: e.target.value,
     });
@@ -69,13 +71,10 @@ class App extends Component {
     });
   };
 
-  completedList = () => {
-
-  }
-
   render() {
     return (
       <div className='list-container'>
+        <SuccessGIF toDoList={this.state.toDoList} successGIF={this.state.successGIF} newTask={this.state.newTask}/>
         <Lists 
           todo={this.state.toDoList} 
           completed={this.state.completedList}
@@ -84,7 +83,7 @@ class App extends Component {
             <input
               type="text"
               placeholder="Add Item"
-              onChange={this.handleNewItemChange}
+              onChange={this.handleNewItemInput}
               value={this.state.newTask}
             />
             <button onClick={this.addItem}>Add</button>

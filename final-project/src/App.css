@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.list-container {
+  text-align: center;
+  padding-top: 200px;
+}
+
+.list-container ul li {
+  list-style: none;
+  margin-bottom: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.list-container form {
+  margin-top: 100px;
+}
+
+.list-container input,
+.list-container button {}
