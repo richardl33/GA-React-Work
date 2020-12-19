@@ -4,59 +4,92 @@ import './App.css';
 
 class App extends Component {
   state = {
-    todoList: [],
+    toDoList: [],
     completedList: [],
     newTask: '',
   }
 
   componentDidMount = () => {
-    let sessTodo = JSON.parse(sessionStorage.getItem('todoList'));
-    this.setState({
-      todoList: sessTodo,
-    })
+    // if (localStorage.getItem('toDoList') === null) {
+    //   let sessTodo = JSON.parse(sessionStorage.getItem('toDoList'));
+    //   this.setState({
+    //     toDoList: sessTodo,
+    //   })
+    // }
+
+      let sessTodo = JSON.parse(sessionStorage.getItem('toDoList'));
+      console.log(sessTodo);
+      if (sessTodo !== null) {
+        this.setState({
+          toDoList: sessTodo,
+        })
+      }
 
     console.log('Mount UP!!!');
   }
 
   componentDidUpdate = () => {
-    sessionStorage.setItem('todoList', JSON.stringify(this.state.todoList))
+    sessionStorage.setItem('toDoList', JSON.stringify(this.state.toDoList));
 
-    console.log('Update HA');
+    console.log('Updated!!!');
   }
 
-  handleNewItemChange = (event) => {
+  handleNewItemChange = e => {
     this.setState({
-      newTask: event.target.value,
+      newTask: e.target.value,
     });
   };
 
-  addItem = (event) => {
-    event.preventDefault();
-    const toDos = [...this.state.todoList];
+  addItem = e => {
+    e.preventDefault();
+    const toDos = [...this.state.toDoList];
     toDos.push(this.state.newTask);
     this.setState({ 
-      todoList: toDos, 
-    }, console.log(this.state.todoList));
-
+      toDoList: toDos, 
+      newTask: ''
+    });
   };
+
+  removeItem = (removedItem) => {
+    const toDoItems = this.state.toDoList.slice();
+    const removedItemIndex = toDoItems.indexOf(removedItem);
+
+    if ( removedItemIndex > -1 ) {
+      toDoItems.splice(removedItemIndex, 1);
+      this.setState({
+        toDoList: toDoItems,
+      });
+    }
+  }
+
+  clearList = e => {
+    e.preventDefault();
+    this.setState({
+      toDoList: [],
+    });
+  };
+
+  completedList = () => {
+
+  }
 
   render() {
     return (
-      <div>
+      <div className='list-container'>
         <Lists 
-          todo={this.state.todoList} 
-          completed={this.state.completedList}/>
-
+          todo={this.state.toDoList} 
+          completed={this.state.completedList}
+          removeItem={this.removeItem}/>
           <form>
             <input
               type="text"
-              placeholder="Type an item here"
+              placeholder="Add Item"
               onChange={this.handleNewItemChange}
               value={this.state.newTask}
             />
             <button onClick={this.addItem}>Add</button>
+            <button onClick={this.clearList}>All Done</button>
           </form>
-          {/* <button onClick={this.clearList}>Finished the list!</button> */}
       </div>
     );
   }

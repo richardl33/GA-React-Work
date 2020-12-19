@@ -2,17 +2,24 @@ import React, { Component } from 'react';
 import ListItem from './ListItem';
 
 class Lists extends Component {
-   render() {
-      const todoItems = this.props.todo;
-      // const completedItems = this.props.completed;
-      // console.log(todoItems);
 
-      let allLists = todoItems.map((item, index) => (
-        <ListItem
-            listItem={item}
-            key={`film-${index}`}
-         />
-      ));
+
+   render() {
+      let allLists;
+      const toDoItems = this.props.todo;
+      // const completedItems = this.props.completed;
+      // console.log(toDoItems);
+
+      if (toDoItems !== null) {
+         console.log('GOOODY')
+         allLists = this.props.todo.map((item, index) => (
+           <ListItem
+               listItem={item}
+               key={`list-item-${index}`}
+               removeItem={this.props.removeItem}
+            />
+         ));
+      }
 
       return (
          <div>
