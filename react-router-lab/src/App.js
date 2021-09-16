@@ -19,9 +19,12 @@ class App extends Component {
           </nav>
           <div>
             <Switch>
-              <Route path="/stocks" render={() => <Dashboard stocks={this.state.stocks}/>}/>
+              <Route exact path="/stocks" render={() => <Dashboard stocks={this.state.stocks}/>}/>
               <Route path="/about" />
-              <Route path="/stocks/:symbol" render={(routerProps) => <Stock {...routerProps} stocks={this.state.stocks} />}/>
+              <Route exact path="/stocks/:symbol" render={(routerProps) => {
+                console.log(routerProps)
+                return <Stock {...routerProps} stocks={this.state.stocks} />
+                }}/>
             </Switch>
           </div>
         </div>
